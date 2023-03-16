@@ -48,7 +48,6 @@ public class flightDatabase {
       if(Double.parseDouble(DIVERTED)==0.0) this.DIVERTED=false;
       else this.DIVERTED=true;
       this.DISTANCE = Double.parseDouble(DISTANCE);
-      this.DISTANCE = 0;
     }
     
 }
