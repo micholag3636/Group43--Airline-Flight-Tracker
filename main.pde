@@ -23,7 +23,6 @@ void setup() {
    plot.setDim(1000,500);
   plot.setPos(50, 50);
 
-  // Set the title and axis labels
   plot.setTitleText("Flight Schedule");
   plot.getXAxis().setAxisLabelText("Date");
   plot.getYAxis().setAxisLabelText("Number of Flights");
@@ -35,7 +34,6 @@ void setup() {
     GPointsArray points = new GPointsArray(flightsInRange.size());
       
   
-  // Add each date and corresponding number of flights as a point in the data series
   for (int i = 0; i < flightsInRange.size(); i++) {
     flightAndDate f = flightsInRange.get(i);
     System.out.println(f.getDate()+" "+f.number);
@@ -99,8 +97,6 @@ void draw() {
     plot.getHistogram().setDrawLabels(true);
     plot.getHistogram().setLabelsOffset(23);
     plot.drawHistograms();
-    //plot.drawFilledContours(GPlot.HORIZONTAL, 0);
-    //plot.drawPoints();
     plot.endDraw();
     
 }
