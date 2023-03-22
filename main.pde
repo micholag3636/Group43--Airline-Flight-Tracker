@@ -7,7 +7,7 @@ GPlot plot;
 
 
 void setup() {
-  size(1650,940);
+  size(1600,900);
   try (BufferedReader br = new BufferedReader(createReader(FILENAME))) {
     String line;
     line = br.readLine(); //heading line skipped we can format it later
