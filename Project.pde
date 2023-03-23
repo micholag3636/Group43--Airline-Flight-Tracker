@@ -43,8 +43,9 @@ public class flightDatabase {
         this.DEP_TIME = DEP_TIME;
         this.CRS_ARR_TIME = CRS_ARR_TIME;
         this.ARR_TIME = ARR_TIME;
+        //bugfix - Robin
       if(Double.parseDouble(CANCELLED)==0.0) this.CANCELLED=false;
-      else this.DIVERTED=true;
+      else this.CANCELLED=true;
       if(Double.parseDouble(DIVERTED)==0.0) this.DIVERTED=false;
       else this.DIVERTED=true;
       this.DISTANCE = Double.parseDouble(DISTANCE);
