@@ -34,7 +34,7 @@ void pieChart(float diameter, int[] data) {
   
    
   void draw() {
-   
+    
     colorMode( HSB, 360,100,100);
   hue = slider1.sliderVal; 
    
@@ -176,16 +176,18 @@ first = first*360;
           square(50,170,20);
           text(five, 75, 185);
           
-        slider1.display();        
+        slider1.display();   
+        
+        
+         for (int i = 2; i<Widgets.size(); i++) {
+    Widget aWidget = (Widget)Widgets.get(4);
+    aWidget.draw();
+
+  
+ 
+  }
 }
   
   
   
   
-  
-  
-  
-  
-  
-  
-}
