@@ -3,11 +3,7 @@ import java.util.ArrayList;
 piechartmain pi;
 //float hue; 
 String FILENAME = "flights_full.csv";
-//public String one;
-//public String two;
-//public String three;
-//public String four;
-//public String five;
+
 Slider slider1;
 int mod;
 float col;
@@ -32,9 +28,12 @@ ArrayList widgetList;
         Screen sc3 = new Screen(0);
             Screen sc4 = new Screen(170);
                 Screen sc5 = new Screen(220);
+                
+void settings() {
+  size(SCREEN_X, SCREEN_Y);
+}
 void setup() {
   PFont stdFont;
-
 
 Screen screen1, screen2, screen3, screen4, screen5;
   stdFont=loadFont("Arial-BoldMT-48.vlw");
@@ -45,7 +44,7 @@ Screen screen1, screen2, screen3, screen4, screen5;
     
  
 
-  size(700, 700);
+ 
   
    stdFont=loadFont("Arial-BoldMT-48.vlw");
   textFont(stdFont);
@@ -87,7 +86,7 @@ Screen screen1, screen2, screen3, screen4, screen5;
 
 
 
-  size(1000, 1000);
+
   noStroke();
 }
 
