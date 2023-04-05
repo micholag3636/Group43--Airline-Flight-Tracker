@@ -1,4 +1,4 @@
-   ArrayList Widgets;
+ ArrayList Widgets;
  PFont stdFont;
  final int EVENT_BUTTON1=1;
 final int EVENT_BUTTON2=2;

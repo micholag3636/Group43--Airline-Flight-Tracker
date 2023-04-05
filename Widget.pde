@@ -7,9 +7,14 @@ class Widget {
 
   Widget(int x,int y, int width, int height, String label,
   color widgetColor, PFont widgetFont, int event){
-    this.x=x; this.y=y; this.width = width; this.height= height;
-    this.label=label; this.event=event; 
-    this.widgetColor=widgetColor; this.widgetFont=widgetFont;
+    this.x=x; 
+    this.y=y; 
+    this.width = width; 
+    this.height= height;
+    this.label=label; 
+    this.event=event; 
+    this.widgetColor=widgetColor; 
+    this.widgetFont=widgetFont;
     labelColor= color(0);
     this.strokecolor = strokecolor;
    }
