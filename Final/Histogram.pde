@@ -39,8 +39,8 @@ void histSetup(){
   plot.setTitleText(title);
   plot.getXAxis().setAxisLabelText(xLabel);
   plot.getYAxis().setAxisLabelText(yLabel);
-  if(vertical==false) plot.startHistograms(GPlot.HORIZONTAL);
-  else  plot.startHistograms(GPlot.VERTICAL);
+  if(vertical==false) plot.startHistograms(GPlot.VERTICAL);
+  else  plot.startHistograms(GPlot.HORIZONTAL);
   GPointsArray points = new GPointsArray(size);
   
     if(this.flightsInRange!=null){ 
