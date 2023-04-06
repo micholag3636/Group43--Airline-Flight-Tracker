@@ -34,6 +34,7 @@ void setup() {
     
     
   }
+  plot = new GPlot(this);
   theScreen = new Screen(flights);
 }
 
