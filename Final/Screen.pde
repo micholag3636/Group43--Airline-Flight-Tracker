@@ -3,7 +3,7 @@ class Screen {
   Map theMap; // initialize map screen
   InfoZone theInfo;
   Pie thePie;
-  
+  histogram theHist;
   ArrayList widgetList;
   int screenNo;
 
@@ -13,6 +13,7 @@ class Screen {
     theMap.getColors(tally(flights, GET_DEST_STATE_ABR)); // uses tally method to calculate colours for each state
     theInfo = new InfoZone();
     thePie = new Pie();
+    theHist = new histogram(getFlightsByDateRange("01/01/2023", "01/02/2023"));
     screenNo = 0;
     
     Widget Home;
@@ -29,7 +30,7 @@ class Screen {
     background(BG_COLOR);
     if (screenNo == 0 ) theMenu.draw();
     // Comment in when adding screen
-//    else if (screenNo == 1) whatever.draw();
+    else if (screenNo == 1) theHist.HistogramDraw();
     else if (screenNo == 2)  thePie.draw();
     else if (screenNo == 3) {
       theMap.draw();
@@ -42,6 +43,7 @@ class Screen {
   }
   void mousePressed() {
     if (screenNo == 0) screenNo = theMenu.mousePressed();
+    else if (screenNo == 1) theHist.dateButtons();
     else if (screenNo == 3) narrowFlights = narrow(flights, theMap.mousePressed(), GET_ORIGIN_STATE_ABR);
     for (int i = 0; i<widgetList.size(); i++) {
       Widget aWidget = (Widget) widgetList.get(i);
