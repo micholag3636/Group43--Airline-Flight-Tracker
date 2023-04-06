@@ -24,10 +24,10 @@ class StateWidget {
   String getName(int mX, int mY) {
     RPoint location = new RPoint(mX, mY);
     if (buttonShape.contains(location)) {
-      borderLine = BG_COLOR;
+      borderLine = 0;
       return abr;
     }
-    borderLine = widgetColor;
+    borderLine = 0;
     return null;
   }
 }

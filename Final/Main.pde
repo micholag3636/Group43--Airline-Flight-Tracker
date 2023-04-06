@@ -26,6 +26,10 @@ void setup() {
   }
   catch (Exception e) {
     e.printStackTrace();
+    
+    
+    
+    
   }
   theScreen = new Screen(flights);
 }
