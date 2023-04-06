@@ -36,14 +36,14 @@ class Navigation {
       event = aWidget.getEvent(mouseX, mouseY);
       switch(event) {
       case EVENT_BUTTON1:
-        return 0;
+        return 1;
       case EVENT_BUTTON2:
         return 2;
       case EVENT_BUTTON3:
         return 3;
       }
     }
-    return 6;
+    return 0;
   }
   void mouseMoved() {
     int possy = 0;
