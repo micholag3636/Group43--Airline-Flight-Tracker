@@ -27,9 +27,9 @@ class Screen {
   }
   void draw() {
     background(BG_COLOR);
-    if (screenNo == 0) theMenu.draw();
+    if (screenNo == 0 ) theMenu.draw();
     // Comment in when adding screen
-//    else if (screenNo == 1) theMenu.draw();
+//    else if (screenNo == 1) whatever.draw();
     else if (screenNo == 2)  thePie.draw();
     else if (screenNo == 3) {
       theMap.draw();
