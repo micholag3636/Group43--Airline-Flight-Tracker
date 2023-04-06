@@ -98,7 +98,7 @@ class Button{
     StartDate=msAvani+"/"+dsAvani+"/"+yAvani;
     EndDate=meAvani+"/"+deAvani+"/"+yAvani;
     ArrayList<flightAndDate> flightsInRange = getFlightsByDateRange(StartDate,EndDate);
-    plot.startHistograms(GPlot.HORIZONTAL);
+    plot.startHistograms(GPlot.VERTICAL);
     GPointsArray points = new GPointsArray(flightsInRange.size());
 
   
