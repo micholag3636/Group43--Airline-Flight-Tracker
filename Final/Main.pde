@@ -7,7 +7,9 @@ GPlot plot;
 String FILENAME = "flights_full.csv";
 ArrayList<flightDatabase> flights;
 ArrayList<flightDatabase> narrowFlights;
+int on = 1;
 
+ControlP5 cp5;
 Screen theScreen;
 
 void settings() {
@@ -30,12 +32,19 @@ void setup() {
   catch (Exception e) {
     e.printStackTrace();
     
-    
-    
-    
   }
   plot = new GPlot(this);
   theScreen = new Screen(flights);
+  
+    cp5 = new ControlP5(this);
+    List Graph = Arrays.asList("Histogram", "Pie Chart", "Map Menu");
+    cp5.addScrollableList("Graph")
+       .setPosition(1300, 700)
+       .setSize(200,200)
+       .setBarHeight(40)
+       .setItemHeight(40)
+       .addItems(Graph)
+       .setOpen(true);
 }
 
 
@@ -82,4 +91,10 @@ void mousePressed() {
 }
 void mouseMoved() {
   theScreen.mouseMoved();
+}
+
+void Graph(int index){
+  String holder = cp5.get(ScrollableList.class, "Graph").getItem(index).get("value").toString();
+  theScreen.screenNo = Integer.parseInt(holder) + 1;
+  on = 0;
 }

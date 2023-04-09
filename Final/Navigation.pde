@@ -1,9 +1,18 @@
+import controlP5.*;
+import java.util.*;
+  
 class Navigation {
   ArrayList widgetList;
   PFont stdFont;
   color bgcolor;
+  
+  int x, y, widthSize, heightSize;
+  int barY;
+  String[] items = {"a", "b", "c", "d"};
+  String listName;
+  ControlP5 cp5;
 
-  Navigation() {
+  Navigation(ControlP5 cp5, int x, int y, int widthSize, int heightSize, int barY, String[] items, String listName) {
     bgcolor = 255;
     Widget widget1, widget2, widget3;
     stdFont=loadFont("Calibri-Bold-20.vlw");
@@ -19,6 +28,15 @@ class Navigation {
     widgetList.add(widget1);
     widgetList.add(widget2);
     widgetList.add(widget3);
+    
+    this.cp5 = cp5;
+    this.x = x;
+    this.y = y;
+    this.widthSize = widthSize;
+    this.heightSize = heightSize;
+    this.barY = barY;
+    this.items = items;
+    this.listName = listName;
   }
 
   void draw() {
@@ -27,6 +45,8 @@ class Navigation {
       Widget aWidget = (Widget) widgetList.get(i);
       aWidget.draw();
     }
+    
+    
   }
 
   int mousePressed() {

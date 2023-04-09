@@ -8,6 +8,7 @@ class Pie {
     pi = new piechartmain(mod);
   }
   void draw() {
+    background(255);
     pi.draw(slider1);
   }
 }
