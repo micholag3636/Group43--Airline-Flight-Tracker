@@ -33,12 +33,18 @@ class Screen {
     background(BG_COLOR);
     //if (screenNo == 0 ) theMenu.draw();
     // Comment in when adding screen
+    if(screenNo == 2) colorMode( HSB, 360, 0, 100);
+    else colorMode(RGB, 255, 255, 255);
+    
     if (screenNo == 1) theHist.HistogramDraw();
-    else if (screenNo == 2)  thePie.draw();
+    else if (screenNo == 2){  
+      thePie.draw();
+    }
     else if (screenNo == 3) {
       theMap.draw();
       theInfo.draw(narrowFlights);
     }
+    
     for (int i = 0; i < widgetList.size(); i++) {
       Widget aWidget = (Widget) widgetList.get(i);
       aWidget.draw();

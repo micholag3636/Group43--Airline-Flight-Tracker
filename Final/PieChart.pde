@@ -9,7 +9,6 @@ public int top = 0;
 float col;
 
 class piechartmain {
-
   int mod;
   piechartmain(int mod) {
 
@@ -33,8 +32,6 @@ class piechartmain {
 
 
   void draw(Slider slider1) {
-
-    colorMode( HSB, 360, 100, 100);
     hue = slider1.sliderVal;
 
 
@@ -46,7 +43,6 @@ class piechartmain {
 
 
     int[] angles = { first, second, third, fourth, fifth };
-    background( 0);
     System.out.println(hue);
     fill( hue, 100, 100); //hue modified by slider1
     rect( 20, 20, 50, 50);
@@ -153,7 +149,7 @@ class piechartmain {
     //fifth = fifth*360;
 
 
-    background(255);
+    background(360);
     pieChart(900, angles);
     fill(0);
     square(50, 50, 20);
