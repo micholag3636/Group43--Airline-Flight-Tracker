@@ -1,55 +1,54 @@
 class scatterPlot{
-  ArrayList<String> data; 
+  GPointsArray points1;
+  GPointsArray points2;
   String title;
   String xLabel;
   String yLabel;
-  boolean fill;
+
   
-  scatterPlot(String heading,String xaxsis,String yaxsis, ArrayList<String> f,boolean val){
+    scatterPlot(String heading,String xaxsis,String yaxsis,GPointsArray A,GPointsArray B){
     xLabel=xaxsis;
     yLabel=yaxsis;
     title=heading;
-    data=f;
-    fill=val;
-    scatterSetup();
+    this.points1 = A;
+    this.points2 = B;
+    Setup();
   }
  
 
+void Setup(){
+  plot1.setDim(1400,600);
+  plot1.setPos(50, 50);
 
-void scatterSetup(){
-  plot.setDim(1000,500);
-  plot.setPos(50, 50);
-
-  plot.setTitleText(title);
-  plot.getXAxis().setAxisLabelText(xLabel);
-  plot.getYAxis().setAxisLabelText(yLabel);
-  plot.startHistograms(GPlot.VERTICAL);
-  GPointsArray points = new GPointsArray(data.size());
+  plot1.setTitleText(title);
+  plot1.getXAxis().setAxisLabelText(xLabel);
+  plot1.getYAxis().setAxisLabelText(yLabel);
+  plot1.startHistograms(GPlot.VERTICAL);
   
-    for (int i = 0; i < data.size(); i++) {   
-      points.add(Integer.parseInt(data.get(i)), Integer.parseInt(data.get(i)), data.get(i++));}   // x axis int(could change it to string) as string, y value of the data passed as a string, the data label for each data item 
-                                                                    // I had the different dates in my code
-    
-    plot.setPoints(points);
-    
-        
-   plot.activatePanning();
+   plot1.setPoints(points1);
+   plot1.setPointColor(color(0,0,0,100));;
+   plot1.addLayer("otherval", points2);
+   plot1.getLayer("otherval").setPointColor(color(255, 0, 0, 100));
+   plot1.getLayer("otherval").setLineColor(color(255, 0, 0,100));
+   plot1.setXLim(0, 200);
+   plot1.setYLim(0, 3000);
+
 }
   
  
-  void scatterDraw(){
-    plot.beginDraw();
-    plot.drawBox();
-    plot.drawXAxis();
-    plot.drawYAxis();
-    plot.drawTitle();
-    plot.drawGridLines(GPlot.VERTICAL);
-    plot.drawGridLines(GPlot.HORIZONTAL);  
-    plot.drawPoints();
-    if(fill)  plot.drawFilledContours(GPlot.HORIZONTAL, 0);
-    plot.endDraw();
-    
-   
+  void draw(){
+    background(bg2);
+    plot1.beginDraw();
+    plot1.drawBox();
+    plot1.drawXAxis();
+    plot1.drawYAxis();
+    plot1.drawTitle();
+    plot1.drawLegend(new String[] {"Actual Arrival Time", "Schedule Arrivial Time"}, new float[] {0.07, 0.22},  new float[] {0.92, 0.92});
+    plot1.drawPoints();
+    plot1.drawLines();
+    plot1.activatePanning();
+    plot1.endDraw();
+    plot1.activateZooming(1.3, CENTER, CENTER);
   }
    
   

@@ -2,8 +2,8 @@ import java.util.ArrayList;
 import geomerative.*;
 import grafica.*;
 PImage bg,bg2;
-GPlot plot;
-
+GPlot plot,plot1;
+GPointsArray points1,points2;
 String FILENAME = "flights_full.csv";
 ArrayList<flightDatabase> flights;
 ArrayList<flightDatabase> narrowFlights;
@@ -34,23 +34,34 @@ void setup() {
     }
   }
   catch (Exception e) {
-    e.printStackTrace();
-    
+    e.printStackTrace();   
   }
   plot = new GPlot(this);
+  plot1 = new GPlot(this);
+  points1 = new GPointsArray(flights.size());
+  points2 = new GPointsArray(flights.size());
+    for (int i = 0; i < flights.size(); i++) {
+        flightDatabase f= flights.get(i);
+        int v,v1;
+        if(f.CRS_ARR_TIME=="") v=0;
+        else v=Integer.parseInt(f.CRS_ARR_TIME);
+        if(f.ARR_TIME=="") v1=0;
+        else v1=Integer.parseInt(f.ARR_TIME);
+        points1.add(i,v);
+        points2.add(i,v1);
+    }
   theScreen = new Screen(flights);
   
     cp5 = new ControlP5(this);
-    List Graph = Arrays.asList("Histogram", "Pie Chart", "Map Menu");
+    List Graph = Arrays.asList("Histogram", "Pie Chart", "Map Menu","ScatterPlot");
     cp5.addScrollableList("Graph")
-       .setPosition(1300, 700)
+       .setPosition(1300, 660)
        .setSize(200,200)
        .setBarHeight(40)
        .setItemHeight(40)
        .addItems(Graph)
        .setOpen(true);
 }
-
 
 int getMaxNumber(ArrayList<flightAndDate> f){
   int max=1;

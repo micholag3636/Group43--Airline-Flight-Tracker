@@ -33,7 +33,7 @@ class histogram{
 
 
 void histSetup(){
-  plot.setDim(1000,500);
+  plot.setDim(1400,600);
   plot.setPos(50, 50);
 
   plot.setTitleText(title);

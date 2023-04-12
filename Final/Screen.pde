@@ -4,6 +4,7 @@ class Screen {
   InfoZone theInfo;
   Pie thePie;
   histogram theHist;
+  scatterPlot theScatter;
   ArrayList widgetList;
   int screenNo;
   ControlP5 cp5;
@@ -16,6 +17,7 @@ class Screen {
     theInfo = new InfoZone();
     thePie = new Pie();
     theHist = new histogram(getFlightsByDateRange("01/01/2023", "01/02/2023"));
+    theScatter = new scatterPlot("Actual Arrivial Time vs Schduled Time","Flight"," Time",points1, points2);
     screenNo = 0;
     
     
@@ -44,6 +46,9 @@ class Screen {
     else if (screenNo == 3) {
       theMap.draw();
       theInfo.draw(narrowFlights);
+    }
+    else if (screenNo == 4) {
+      theScatter.draw();
     }
     
     for (int i = 0; i < widgetList.size(); i++) {

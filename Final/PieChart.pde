@@ -43,7 +43,7 @@ class piechartmain {
 
 
     int[] angles = { first, second, third, fourth, fifth };
-    System.out.println(hue);
+    //System.out.println(hue);
     fill( hue, 100, 100); //hue modified by slider1
     rect( 20, 20, 50, 50);
 
