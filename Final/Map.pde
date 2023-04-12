@@ -121,6 +121,7 @@ class Map {
   }
 
   void draw() { // draw method for each state
+  background(bg2);
     shape(usa);
     for (int i = 0; i<widgetList.size(); i++) {
       StateWidget aWidget = (StateWidget) widgetList.get(i);

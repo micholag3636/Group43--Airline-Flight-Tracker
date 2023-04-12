@@ -1,10 +1,12 @@
 class histogram{
   ArrayList<flightAndDate> flightsInRange; 
+  ArrayList columnList;
   ArrayList<String> data; 
   String title;
   String xLabel;
   String yLabel;
   int size;  
+  int avgSize=0;
   PImage Rarrow,Larrow;
   Button b1, b2, b3, ok, b4, b5, b6;
   boolean vertical;
@@ -15,8 +17,8 @@ class histogram{
     title=heading;
     data=f;
     size=data.size();
-    vertical=val;
-    histSetup();
+    vertical=val; 
+    hist2Setup();
   }
   
   histogram(ArrayList<flightAndDate> f){
@@ -33,44 +35,24 @@ class histogram{
 
 
 void histSetup(){
-  plot.setDim(1000,500);
+  plot.setDim(1400,600);
   plot.setPos(50, 50);
 
   plot.setTitleText(title);
   plot.getXAxis().setAxisLabelText(xLabel);
   plot.getYAxis().setAxisLabelText(yLabel);
-  if(vertical==false) plot.startHistograms(GPlot.VERTICAL);
-  else  plot.startHistograms(GPlot.HORIZONTAL);
+  plot.startHistograms(GPlot.VERTICAL);
   GPointsArray points = new GPointsArray(size);
-  
-    if(this.flightsInRange!=null){ 
+   
         for (int i = 0; i < size; i++) {
           flightAndDate f = flightsInRange.get(i);
           points.add(i, f.number,f.getDate()); }
-    }
     
-    
-    else if(!vertical){
-    for (int i = 0; i < size; i++) {   
-      points.add(i, Integer.parseInt(data.get(i)), data.get(i++));}   // x axis=0, y value of the data passed as a string, the data label for each data item 
-    }      // I had the different dates in my code
-    
-    else if(vertical){
-    for (int i = 0; i < size; i++) {   
-      points.add(Integer.parseInt(data.get(i)),i, data.get(i++));}   // y axis=0, x value of the data passed as a string, the data label for each data item 
-    }      // I had the different dates in my code
     
     plot.setPoints(points);
     
-         if(this.flightsInRange!=null){
-           if(!vertical){
              plot.setXLim(0, 15);
              plot.setYLim(0, getMaxNumber(flightsInRange));
-           }
-           else{
-             plot.setYLim(0, 15);
-             plot.setXLim(0, getMaxNumber(flightsInRange));
-           }
          b1= new Button(45,25,"ds",Rarrow,Larrow);
          b2 = new Button(125,25,"ms",Rarrow,Larrow);
          b3 = new Button(200,25,"y",Rarrow,Larrow);
@@ -78,16 +60,58 @@ void histSetup(){
          b4= new Button(325,25,"de",Rarrow,Larrow);
          b5 = new Button(410,25,"me",Rarrow,Larrow);
          b6 = new Button(490,25,"y",Rarrow,Larrow);
-     }
+
    
    plot.activatePanning();
-   plot.activateZooming(1.3, CENTER, CENTER);
+}
+
+void hist2Setup(){
+  plot2.setDim(1400,600);
+  plot2.setPos(50, 50);
+
+  plot2.setTitleText(title);
+  plot2.getXAxis().setAxisLabelText(xLabel);
+  plot2.getYAxis().setAxisLabelText(yLabel);
+  if(vertical==false) plot2.startHistograms(GPlot.VERTICAL);
+  else plot2.startHistograms(GPlot.HORIZONTAL);
+
+  GPointsArray points1 = new GPointsArray(size);
+
+    
+    if(!vertical){
+        int j=0;
+    for (int i = 1; i < data.size()+1; i=i+2) { 
+      avgSize+=(data.get(i-1)).length();
+      points1.add(j++, Integer.parseInt(data.get(i)), data.get(i-1));   // x axis int(could change it to string) as string, y value of the data passed as a string, the data label for each data item 
+                                                                    // I had the different dates in my code
+    }
+    avgSize=avgSize/(data.size()/2);
+    }
+    
+    else if(vertical){
+   int j=0;
+    for (int i = 1; i < data.size()+1; i=i+2) { 
+      avgSize+=(data.get(i-1)).length();
+      points1.add(Integer.parseInt(data.get(i)),j++, data.get(i-1));   // x axis int(could change it to string) as string, y value of the data passed as a string, the data label for each data item 
+                                                                    // I had the different dates in my code
+    }
+    avgSize=avgSize/(data.size()/2);
+    }// I had the different dates in my code
+    
+    plot2.setPoints(points1);
+    
+    if(!vertical && avgSize<=3) plot2.setXLim(0, 35);
+    else if(!vertical && avgSize>10) plot2.setXLim(0, 9);
+    else if (!vertical) plot2.setXLim(0, 25);
+    else plot2.setYLim(0, 15);
+   
+   plot2.activatePanning();
+   plot2.activateZooming(1.3, CENTER, CENTER);
 }
   
  
   void HistogramDraw(){
-    background(bg2);
-     plot.beginDraw();
+    plot.beginDraw();
     plot.drawBox();
     plot.drawXAxis();
     plot.drawYAxis();
@@ -110,12 +134,28 @@ void histSetup(){
    }
    
   }
+  
+    void Histogram2Draw(){
+     plot2.beginDraw();
+    plot2.drawBox();
+    plot2.drawXAxis();
+    plot2.drawYAxis();
+    plot2.drawTitle();
+    plot2.drawGridLines(GPlot.VERTICAL);
+    plot2.drawGridLines(GPlot.HORIZONTAL);
+    plot2.getHistogram().setDrawLabels(true);
+    if(!vertical) plot2.getHistogram().setLabelsOffset(23);
+    else plot2.getHistogram().setLabelsOffset(60);
+    plot2.drawHistograms();
+    plot2.endDraw();
+   
+  }
 
   void dateButtons(){
      b1.ButtonClicked(mouseX, mouseY);   
       b2.ButtonClicked(mouseX, mouseY);   
       b3.ButtonClicked(mouseX, mouseY);   
-      ok.Clicked(mouseX, mouseY);  
+      ok.Clicked(mouseX, mouseY,plot);  
       b4.ButtonClicked(mouseX, mouseY);   
       b5.ButtonClicked(mouseX, mouseY);   
       b6.ButtonClicked(mouseX, mouseY); 
@@ -124,6 +164,11 @@ void histSetup(){
   boolean vertical(){
     return vertical;
   }
+  
+
+  
  
-  }
+  
+  
+}
   

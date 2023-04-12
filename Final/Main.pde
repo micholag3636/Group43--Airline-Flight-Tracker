@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 import geomerative.*;
 import grafica.*;
-
+PImage bg,bg2;
 GPlot plot;
 
 String FILENAME = "flights_full.csv";
@@ -18,6 +18,10 @@ void settings() {
 }
 
 void setup() {
+  bg = loadImage("bg.jpg");
+  bg2 = loadImage("plainBG.png");
+  bg.resize(SCREEN_X, SCREEN_Y);
+  bg2.resize(SCREEN_X, SCREEN_Y);
   flights = new ArrayList<flightDatabase>();
   narrowFlights = flights;
   try (BufferedReader br = new BufferedReader(createReader(FILENAME))) {

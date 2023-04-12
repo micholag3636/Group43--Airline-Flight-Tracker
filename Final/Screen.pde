@@ -30,7 +30,8 @@ class Screen {
     
   }
   void draw() {
-    background(BG_COLOR);
+    background(bg);
+    //background(BG_COLOR);
     //if (screenNo == 0 ) theMenu.draw();
     // Comment in when adding screen
     if(screenNo == 2) colorMode( HSB, 360, 0, 100);
