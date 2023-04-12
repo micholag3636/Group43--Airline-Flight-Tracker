@@ -81,6 +81,7 @@ void histSetup(){
      }
    
    plot.activatePanning();
+   plot.activateZooming(1.3, CENTER, CENTER);
 }
   
  
