@@ -1,14 +1,14 @@
 import java.util.ArrayList;
 import geomerative.*;
 import grafica.*;
-PImage bg,bg2;
+PImage bg,bg2,loadingImage;
 GPlot plot,plot1;
 GPointsArray points1,points2;
 String FILENAME = "flights_full.csv";
 ArrayList<flightDatabase> flights;
 ArrayList<flightDatabase> narrowFlights;
 int on = 1;
-
+boolean done=false;
 ControlP5 cp5;
 Screen theScreen;
 
@@ -18,15 +18,21 @@ void settings() {
 }
 
 void setup() {
-  bg = loadImage("bg.jpg");
-  bg2 = loadImage("plainBG.png");
-  bg.resize(SCREEN_X, SCREEN_Y);
+  loadingImage=loadImage("loading.gif");
+  bg = loadImage("bg.jpg"); //load a home screen background
+  bg2 = loadImage("plainBG.png");  //load a plain background
+  bg.resize(SCREEN_X, SCREEN_Y);  //resize both images to fit out screen size
   bg2.resize(SCREEN_X, SCREEN_Y);
-  flights = new ArrayList<flightDatabase>();
-  narrowFlights = flights;
-  try (BufferedReader br = new BufferedReader(createReader(FILENAME))) {
+  plot = new GPlot(this);  //to create the plot for histogram
+  plot1 = new GPlot(this);  //to create the plot for scatterplot
+  cp5 = new ControlP5(this);
+  
+  flights = new ArrayList<flightDatabase>();  //create an arraylist to store our file data
+  new Thread(new Runnable() {
+    public void run() {
+  try (BufferedReader br = new BufferedReader(createReader(FILENAME))) {  //Method to read in data from file. Made by Avani
     String line;
-    line = br.readLine(); //heading line skipped we can format it later
+    line = br.readLine(); //heading line skipped 
     while ((line = br.readLine()) != null) {
       String[] fields = line.replaceAll("\"", "").split(",");
       // Create a new flight object and add it to the ArrayList
@@ -36,9 +42,7 @@ void setup() {
   catch (Exception e) {
     e.printStackTrace();   
   }
-  plot = new GPlot(this);
-  plot1 = new GPlot(this);
-  points1 = new GPointsArray(flights.size());
+   points1 = new GPointsArray(flights.size());  //intiialise the data array for scatterplot
   points2 = new GPointsArray(flights.size());
     for (int i = 0; i < flights.size(); i++) {
         flightDatabase f= flights.get(i);
@@ -50,10 +54,13 @@ void setup() {
         points1.add(i,v);
         points2.add(i,v1);
     }
-  theScreen = new Screen(flights);
   
-    cp5 = new ControlP5(this);
-    List Graph = Arrays.asList("Histogram", "Pie Chart", "Map Menu","ScatterPlot");
+    
+   
+  theScreen = new Screen(flights);
+  narrowFlights = flights;
+  done=true;
+   List Graph = Arrays.asList("Histogram", "Pie Chart", "Map Menu","ScatterPlot");
     cp5.addScrollableList("Graph")
        .setPosition(1300, 660)
        .setSize(200,200)
@@ -61,34 +68,39 @@ void setup() {
        .setItemHeight(40)
        .addItems(Graph)
        .setOpen(true);
+       
+       
+  }
+  }).start();
+ 
 }
 
-int getMaxNumber(ArrayList<flightAndDate> f){
-  int max=1;
+int getMaxNumber(ArrayList<flightAndDate> f){  //function by avani to find the max number of flights that flew on a particular date
+  int max=1;                                   //sets it to 1 default (used to plot y axis limit)
   for(flightAndDate flight:f){
     if(flight.number>max) max=flight.number;
   }
   return max;
 }
 
- String convert(String date){
-  String parts[]=date.split("/");
+ String convert(String date){   //Made by Avani
+  String parts[]=date.split("/");     //splits a date as the date also contains time we seprate and write them
   if(parts[0].length()==1) parts[0]="0"+parts[0];
   if(parts[1].length()==1) parts[1]="0"+parts[1];
   return parts[0]+"/"+parts[1]+"/"+parts[2];
  }
 
-   ArrayList<flightAndDate> getFlightsByDateRange(String startDate, String endDate) {
-   ArrayList<flightAndDate> result = new ArrayList<>();
-   startDate=convert(startDate);
+   ArrayList<flightAndDate> getFlightsByDateRange(String startDate, String endDate) {  //Made by Avani
+   ArrayList<flightAndDate> result = new ArrayList<>();   //function to sort data from the arraylist and store it into another arraylist based on the start date and end date
+   startDate=convert(startDate);  //normalise the string
    endDate=convert(endDate);
   for (int i=0;i<flights.size();i++) {
     flightDatabase flight=flights.get(i);
-    String flightDate = flight.FL_DATE.split(" ")[0];
+    String flightDate = flight.FL_DATE.split(" ")[0];  //seprate the date and time and normalise the date
     flightDate=convert(flightDate);
-    if (flightDate.compareTo(startDate) >= 0 && flightDate.compareTo(endDate) <= 0) {
+    if (flightDate.compareTo(startDate) >= 0 && flightDate.compareTo(endDate) <= 0) {  //if date is equal
       int ct=0;
-      for(flightAndDate fDate : result){
+      for(flightAndDate fDate : result){   //if date already in our new arrayList ct++ else add date and set number to 1
         if (flightDate.compareTo(fDate.getDate())==0) ct++;
         if (ct > 0) fDate.number++;
       }
@@ -99,13 +111,19 @@ int getMaxNumber(ArrayList<flightAndDate> f){
 }
 
 void draw() {
+  if (!done) {
+    image(loadingImage, 0, 0, width, height);
+  } else {
   theScreen.draw();
+  }
 }
 void mousePressed() {
+  if(done){
   theScreen.mousePressed();
+  }
 }
 void mouseMoved() {
-  theScreen.mouseMoved();
+  if(done) theScreen.mouseMoved();
 }
 
 void Graph(int index){

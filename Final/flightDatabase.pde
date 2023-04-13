@@ -1,3 +1,5 @@
+//Class and constructor created by Robin
+//flightDatabase constructor created by Avani. Edited by Robin.
 public class flightDatabase {
     
      String FL_DATE;
@@ -18,7 +20,7 @@ public class flightDatabase {
      boolean CANCELLED;
      boolean DIVERTED;
      double DISTANCE;
-
+      
      flightDatabase(String FL_DATE, String MKT_CARRIER, int MKT_CARRIER_FL_NUM, String ORIGIN, String ORIGIN_CITY_NAME,
      String ORIGIN_STATE_ABR, String ORIGIN_WAC, String DEST, String DEST_CITY_NAME, String DEST_STATE_ABR, String DEST_WAC,
      String CRS_DEP_TIME, String DEP_TIME, 

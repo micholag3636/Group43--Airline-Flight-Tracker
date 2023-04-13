@@ -3,8 +3,8 @@ class Screen {
   Map theMap; // initialize map screen
   InfoZone theInfo;
   Pie thePie;
-  histogram theHist;
-  scatterPlot theScatter;
+  histogram theHist;  //initalize the histogram
+  scatterPlot theScatter;  //initialize the scatterplot
   ArrayList widgetList;
   int screenNo;
   ControlP5 cp5;
@@ -16,8 +16,8 @@ class Screen {
     theMap.getColors(tally(flights, GET_DEST_STATE_ABR)); // uses tally method to calculate colours for each state
     theInfo = new InfoZone();
     thePie = new Pie();
-    theHist = new histogram(getFlightsByDateRange("01/01/2023", "01/02/2023"));
-    theScatter = new scatterPlot("Actual Arrivial Time vs Schduled Time","Flight"," Time",points1, points2);
+    theHist = new histogram(getFlightsByDateRange("01/01/2023", "01/02/2023")); //create the histogram and set data and labels
+    theScatter = new scatterPlot("Actual Arrivial Time vs Schduled Time","Flight"," Time",points1, points2); //create the histogram and set data and labels
     screenNo = 0;
     
     
@@ -39,7 +39,7 @@ class Screen {
     if(screenNo == 2) colorMode( HSB, 360, 0, 100);
     else colorMode(RGB, 255, 255, 255);
     
-    if (screenNo == 1) theHist.HistogramDraw();
+    if (screenNo == 1) theHist.HistogramDraw();  //if screen is 1 draw the graph
     else if (screenNo == 2){  
       thePie.draw();
     }
@@ -47,7 +47,7 @@ class Screen {
       theMap.draw();
       theInfo.draw(narrowFlights);
     }
-    else if (screenNo == 4) {
+    else if (screenNo == 4) {   //if screen is 4 draw the graph
       theScatter.draw();
     }
     
@@ -57,7 +57,7 @@ class Screen {
     }
   }
   void mousePressed() {
-    if (screenNo == 1) theHist.dateButtons();
+    if (screenNo == 1) theHist.dateButtons();  //if screen 1 check the date query buttons
     else if (screenNo == 3) narrowFlights = narrow(flights, theMap.mousePressed(), GET_ORIGIN_STATE_ABR);
     for (int i = 0; i<widgetList.size(); i++) {
       Widget aWidget = (Widget) widgetList.get(i);
