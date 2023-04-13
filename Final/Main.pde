@@ -1,13 +1,15 @@
 import java.util.ArrayList;
 import geomerative.*;
 import grafica.*;
-PImage bg,bg2;
+PImage bg, bg2, loadingImage;
 GPlot plot,plot1;
 GPointsArray points1,points2;
 String FILENAME = "flights_full.csv";
 ArrayList<flightDatabase> flights;
 ArrayList<flightDatabase> narrowFlights;
-int on = 1;
+int on = 0;
+boolean done = false;
+
 
 ControlP5 cp5;
 Screen theScreen;
@@ -18,10 +20,7 @@ void settings() {
 }
 
 void setup() {
-  bg = loadImage("bg.jpg");
-  bg2 = loadImage("plainBG.png");
-  bg.resize(SCREEN_X, SCREEN_Y);
-  bg2.resize(SCREEN_X, SCREEN_Y);
+  thread("loadImage");
   flights = new ArrayList<flightDatabase>();
   narrowFlights = flights;
   try (BufferedReader br = new BufferedReader(createReader(FILENAME))) {
@@ -36,6 +35,7 @@ void setup() {
   catch (Exception e) {
     e.printStackTrace();   
   }
+  
   plot = new GPlot(this);
   plot1 = new GPlot(this);
   points1 = new GPointsArray(flights.size());
@@ -99,7 +99,7 @@ int getMaxNumber(ArrayList<flightAndDate> f){
 }
 
 void draw() {
-  theScreen.draw();
+    theScreen.draw();
 }
 void mousePressed() {
   theScreen.mousePressed();
@@ -112,4 +112,13 @@ void Graph(int index){
   String holder = cp5.get(ScrollableList.class, "Graph").getItem(index).get("value").toString();
   theScreen.screenNo = Integer.parseInt(holder) + 1;
   on = 0;
+}
+
+void loadImage(){
+  bg = loadImage("bg.jpg");
+  bg2 = loadImage("plainBG.png");
+  loadingImage = loadImage("loading.gif");
+  bg.resize(SCREEN_X, SCREEN_Y);
+  bg2.resize(SCREEN_X, SCREEN_Y);
+  loadingImage.resize(SCREEN_X, SCREEN_Y);
 }
