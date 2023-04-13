@@ -7,8 +7,11 @@ GPointsArray points1,points2;
 String FILENAME = "flights_full.csv";
 ArrayList<flightDatabase> flights;
 ArrayList<flightDatabase> narrowFlights;
-int on = 1;
 boolean done=false;
+int on = 0;
+
+
+
 ControlP5 cp5;
 Screen theScreen;
 
@@ -30,7 +33,9 @@ void setup() {
   flights = new ArrayList<flightDatabase>();  //create an arraylist to store our file data
   new Thread(new Runnable() {
     public void run() {
-  try (BufferedReader br = new BufferedReader(createReader(FILENAME))) {  //Method to read in data from file. Made by Avani
+  flights = new ArrayList<flightDatabase>();
+  narrowFlights = flights;
+  try (BufferedReader br = new BufferedReader(createReader(FILENAME))) {
     String line;
     line = br.readLine(); //heading line skipped 
     while ((line = br.readLine()) != null) {
@@ -42,7 +47,8 @@ void setup() {
   catch (Exception e) {
     e.printStackTrace();   
   }
-   points1 = new GPointsArray(flights.size());  //intiialise the data array for scatterplot
+  
+  points1 = new GPointsArray(flights.size());
   points2 = new GPointsArray(flights.size());
     for (int i = 0; i < flights.size(); i++) {
         flightDatabase f= flights.get(i);
@@ -69,8 +75,7 @@ void setup() {
        .addItems(Graph)
        .setOpen(true);
        
-       
-  }
+  }   
   }).start();
  
 }
