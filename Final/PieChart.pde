@@ -17,7 +17,7 @@ class piechartmain {
   }
 
 
-
+//Function that calls pie chart
   void pieChart(float diameter, int[] data) {
     float lastAngle = 100;
     for (int i = 0; i < data.length; i++) {
@@ -32,16 +32,17 @@ class piechartmain {
 
 
   void draw(Slider slider1) {
+    //hue is equal to slider valu
     hue = slider1.sliderVal;
 
-
+//pulling each piece of data from excell sheet
     one = flights.get(mod).ORIGIN;
     two = flights.get(mod+ 1).ORIGIN;
     three = flights.get(mod+ 2).ORIGIN;
     four = flights.get( mod+ 3).ORIGIN;
     five = flights.get( mod+ 4).ORIGIN;
 
-
+//all data piechart input
     int[] angles = { first, second, third, fourth, fifth };
     //System.out.println(hue);
     fill( hue, 100, 100); //hue modified by slider1
@@ -58,6 +59,7 @@ class piechartmain {
         three = flights.get(m+ 2).ORIGIN;
         four = flights.get( m+ 3).ORIGIN;
         five = flights.get( m+ 4).ORIGIN;
+        // controls how much data points for each origin we want to be represented in pie chart
         top = 0;
         int d = 0;
         first = 1;
@@ -68,6 +70,7 @@ class piechartmain {
         for (flightDatabase s : flights) {
           if (d < 100) {
             if (s.ORIGIN == one) {
+            //retrieve value from datasheet and add it to variable for one of the datasets in piechart
               first= first + s.DEST_WAC;
               System.out.println(first);
               //  top = top + 1;
@@ -136,6 +139,7 @@ class piechartmain {
       }
       top = top + 1;
     }
+    //To equate each dataset to a percentage of the pie chart
     int sum = first + second + third + fourth + fifth;
     first = sum / first;
     first = first*360;
@@ -148,6 +152,7 @@ class piechartmain {
     //fifth = fifth / sum;
     //fifth = fifth*360;
 
+ //Code for the legend
     background(bg2);
    // background(360);
     pieChart(900, angles);
