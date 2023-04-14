@@ -9,6 +9,7 @@ String FILENAME = "flights_full.csv";
 ArrayList<flightDatabase> flights;
 ArrayList<flightDatabase> narrowFlights;
 boolean done=false;
+int on = 1;
 
 ControlP5 cp5;
 Screen theScreen;

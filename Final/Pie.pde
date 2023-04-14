@@ -1,4 +1,4 @@
-Created by Michael
+//Created by Michael
 class Pie {
   float col;
   int mod;
