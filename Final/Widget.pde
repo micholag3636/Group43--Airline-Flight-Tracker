@@ -1,4 +1,4 @@
-//Created by Abigail Bosch, Contributed by Michael
+//Created by Abigail Bosch, Michael
 class Widget {
   int x, y, width, height;
   String label;
