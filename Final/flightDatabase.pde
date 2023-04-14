@@ -35,7 +35,8 @@ public class flightDatabase {
         this.ORIGIN_WAC = Integer.parseInt(ORIGIN_WAC);
         this.DEST = DEST;
         this.DEST_CITY_NAME = DEST_CITY_NAME;
-        this.DEST_STATE_ABR = DEST_STATE_ABR;
+        if (DEST_STATE_ABR.length() >= 4) this.DEST_STATE_ABR = DEST_STATE_ABR.substring(1, 3);
+        else this.DEST_STATE_ABR = DEST_STATE_ABR;
         this.DEST_WAC = Integer.parseInt(DEST_WAC);
         this.CRS_DEP_TIME = CRS_DEP_TIME;
         this.DEP_TIME = DEP_TIME;

@@ -25,7 +25,7 @@ class Screen {
     PFont stdFont=loadFont("Calibri-Bold-20.vlw");
     textFont(stdFont);
     Home = new Widget(100, SCREEN_Y-100, 100, 40,
-      "Home", color(255, 0, 0), stdFont,
+      "Home", color(255), stdFont,
       EVENT_BUTTON5);
     widgetList = new ArrayList();
     widgetList.add(Home);
@@ -33,9 +33,6 @@ class Screen {
   }
   void draw() {
     background(bg);
-    //background(BG_COLOR);
-    //if (screenNo == 0 ) theMenu.draw();
-    // Comment in when adding screen
     if(screenNo == 2) colorMode( HSB, 360, 0, 100);
     else colorMode(RGB, 255, 255, 255);
     
@@ -44,8 +41,8 @@ class Screen {
       thePie.draw();
     }
     else if (screenNo == 3) {
-      theMap.draw();
       theInfo.draw(narrowFlights);
+      theMap.draw();
     }
     else if (screenNo == 4) {   //if screen is 4 draw the graph
       theScatter.draw();
