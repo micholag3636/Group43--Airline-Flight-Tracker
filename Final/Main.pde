@@ -62,6 +62,7 @@ void setup() {
     }
   
     
+  //Dropdown Menu by D. Templar
    
   theScreen = new Screen(flights);
   narrowFlights = flights;
@@ -131,6 +132,7 @@ void mouseMoved() {
   if(done) theScreen.mouseMoved();
 }
 
+// Input return by D. Templar
 void Graph(int index){
   String holder = cp5.get(ScrollableList.class, "Graph").getItem(index).get("value").toString();
   theScreen.screenNo = Integer.parseInt(holder) + 1;

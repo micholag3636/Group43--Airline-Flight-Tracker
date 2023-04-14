@@ -1,3 +1,4 @@
+//Created by D. Templar
 class Widget {
   int x, y, width, height;
   String label;

@@ -1,3 +1,4 @@
+// Class created by Abigail, contributed by D. Templar
 class Screen {
   Navigation theMenu;
   Map theMap; // initialize map screen

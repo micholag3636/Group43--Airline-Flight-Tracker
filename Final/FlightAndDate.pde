@@ -1,4 +1,4 @@
-//class created by avai to store the number of times a flight flew on a particular date
+//class created by avani to store the number of times a flight flew on a particular date
 class flightAndDate{
   int day;
   int month;
