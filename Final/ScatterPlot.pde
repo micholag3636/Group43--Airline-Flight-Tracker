@@ -1,4 +1,4 @@
-//ScatterPlot graph created by Avani
+//ScatterPlot graph created by Avani Sharma
 class scatterPlot{
   GPointsArray points1; 
   GPointsArray points2;

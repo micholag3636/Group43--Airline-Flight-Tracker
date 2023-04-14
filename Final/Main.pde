@@ -1,4 +1,4 @@
-// Created by Abigail Bosch, Contributed by D. Templar
+// Created by Abigail Bosch, Contributed by D. Templar, Avani Sharma
 import java.util.ArrayList;
 import geomerative.*;
 import grafica.*;
@@ -9,7 +9,6 @@ String FILENAME = "flights_full.csv";
 ArrayList<flightDatabase> flights;
 ArrayList<flightDatabase> narrowFlights;
 boolean done=false;
-int on = 0;
 
 ControlP5 cp5;
 Screen theScreen;
@@ -20,7 +19,7 @@ void settings() {
 }
 
 void setup() {
-  loadingImage=loadImage("loading.gif");
+  loadingImage=loadImage("loading.gif");   //load image for loading screen
   bg = loadImage("bg.jpg"); //load a home screen background
   bg2 = loadImage("plainBG.png");  //load a plain background
   bg.resize(SCREEN_X, SCREEN_Y);  //resize both images to fit out screen size
@@ -30,13 +29,13 @@ void setup() {
   cp5 = new ControlP5(this);
   
   flights = new ArrayList<flightDatabase>();  //create an arraylist to store our file data
-  new Thread(new Runnable() {
-    public void run() {
+  new Thread(new Runnable() {        //creates a new thread where runnable defines the task: Multi-threadig done by Avani Sharma, Helped by D. Templar
+    public void run() {              //run method is implemeted
   flights = new ArrayList<flightDatabase>();
   narrowFlights = flights;
-  try (BufferedReader br = new BufferedReader(createReader(FILENAME))) {
-    String line;
-    line = br.readLine(); //heading line skipped 
+  try (BufferedReader br = new BufferedReader(createReader(FILENAME))) {   //creates a buffered reader and file reader which read data from the csv file 
+    String line;                                                           //Created by Avani Sharma
+    line = br.readLine(); //heading line skipped  
     while ((line = br.readLine()) != null) {
       String[] fields = line.replaceAll("\"", "").split(",");
       // Create a new flight object and add it to the ArrayList
@@ -47,7 +46,7 @@ void setup() {
     e.printStackTrace();   
   }
   
-  points1 = new GPointsArray(flights.size());
+  points1 = new GPointsArray(flights.size());   //creates data array for scatterplot
   points2 = new GPointsArray(flights.size());
     for (int i = 0; i < flights.size(); i++) {
         flightDatabase f= flights.get(i);
@@ -65,7 +64,7 @@ void setup() {
    
   theScreen = new Screen(flights);
   narrowFlights = flights;
-  done=true;
+  done=true;                  //indicates the data has been loaded
    List Graph = Arrays.asList("Histogram", "Pie Chart", "Map Menu","ScatterPlot");
     cp5.addScrollableList("Graph")
        .setPosition(1300, 660)
@@ -80,7 +79,7 @@ void setup() {
  
 }
 
-int getMaxNumber(ArrayList<flightAndDate> f){  //function by avani to find the max number of flights that flew on a particular date
+int getMaxNumber(ArrayList<flightAndDate> f){  //function by Avani Sharma to find the max number of flights that flew on a particular date
   int max=1;                                   //sets it to 1 default (used to plot y axis limit)
   for(flightAndDate flight:f){
     if(flight.number>max) max=flight.number;
@@ -88,14 +87,14 @@ int getMaxNumber(ArrayList<flightAndDate> f){  //function by avani to find the m
   return max;
 }
 
- String convert(String date){   //Made by Avani
+ String convert(String date){   //Made by Avani Sharma
   String parts[]=date.split("/");     //splits a date as the date also contains time we seprate and write them
   if(parts[0].length()==1) parts[0]="0"+parts[0];
   if(parts[1].length()==1) parts[1]="0"+parts[1];
   return parts[0]+"/"+parts[1]+"/"+parts[2];
  }
 
-   ArrayList<flightAndDate> getFlightsByDateRange(String startDate, String endDate) {  //Made by Avani
+   ArrayList<flightAndDate> getFlightsByDateRange(String startDate, String endDate) {  //Made by Avani Sharma
    ArrayList<flightAndDate> result = new ArrayList<>();   //function to sort data from the arraylist and store it into another arraylist based on the start date and end date
    startDate=convert(startDate);  //normalise the string
    endDate=convert(endDate);
@@ -117,7 +116,7 @@ int getMaxNumber(ArrayList<flightAndDate> f){  //function by avani to find the m
 
 void draw() {
   if (!done) {
-    image(loadingImage, 0, 0, width, height);
+    image(loadingImage, 0, 0, width, height);   //loads an image(loading screen) until the thread is done
   } else {
   theScreen.draw();
   }

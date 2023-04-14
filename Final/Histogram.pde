@@ -1,4 +1,4 @@
-//Histogram class create by Avani
+//Histogram class create by Avani Sharma
 class histogram{
   ArrayList<flightAndDate> flightsInRange;  //ArrayList for flights in date range query
   ArrayList<String> data; //ArrayList to plot general data
