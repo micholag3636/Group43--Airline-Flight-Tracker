@@ -1,4 +1,4 @@
-// Class created by Abigail, contributed by D. Templar
+// Class created by Abigail, contributed by D. Templar, Michael
 class Screen {
   Map theMap; // initialize map screen
   InfoZone theInfo; // initialize info section for map screen
