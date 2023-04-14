@@ -1,9 +1,8 @@
 // Class created by Abigail, contributed by D. Templar
 class Screen {
-  Navigation theMenu;
   Map theMap; // initialize map screen
-  InfoZone theInfo;
-  Pie thePie;
+  InfoZone theInfo; // initialize info section for map screen
+  Pie thePie; // initialize the pie chart screen
   histogram theHist;  //initalize the histogram
   scatterPlot theScatter;  //initialize the scatterplot
   ArrayList widgetList;
@@ -15,13 +14,13 @@ class Screen {
     
     theMap = new Map(); // create new map screen
     theMap.getColors(tally(flights, GET_DEST_STATE_ABR)); // uses tally method to calculate colours for each state
-    theInfo = new InfoZone();
+    theInfo = new InfoZone(); // 
     thePie = new Pie();
     theHist = new histogram(getFlightsByDateRange("01/01/2023", "01/02/2023")); //create the histogram and set data and labels
     theScatter = new scatterPlot("Actual Arrivial Time vs Schduled Time","Flight"," Time",points1, points2); //create the histogram and set data and labels
     screenNo = 0;
     
-    
+    // Home Widget
     Widget Home;
     PFont stdFont=loadFont("Calibri-Bold-20.vlw");
     textFont(stdFont);

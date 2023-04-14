@@ -1,3 +1,5 @@
+// Map Screen InfoZone class created by Abigail Bosch
+// Displays information on each state based on narrow arraylist
 class InfoZone {
 
   InfoZone() {}

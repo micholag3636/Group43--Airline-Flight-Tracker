@@ -1,3 +1,4 @@
+// Map Screen Map class created by Abigail Bosch
 class Map {
   ArrayList widgetList;
   PShape usa;
@@ -146,9 +147,11 @@ class Map {
   }
   String mousePressed() { // clicky on state??
     String stateName = "";
+    stateTitle = "America";
     for (int i = 0; i<widgetList.size(); i++) {
         StateWidget aWidget = (StateWidget) widgetList.get(i);
-        if (aWidget.getName(mouseX, mouseY) != null) {
+        if (aWidget.getName(mouseX, mouseY) != null) { // if mouse is over a state
+          //get state code and title
           stateName = aWidget.getName(mouseX, mouseY);
           stateTitle = aWidget.getTitle(mouseX, mouseY);
         }
@@ -157,12 +160,13 @@ class Map {
   }
   void getColors(int[] tally) { //calculates each states colour by getting the number of states tallied and putting it through a formula 
     int max = 1;
+    // gets largest number of flights from a state
     for (int i = 0; i < tally.length; i++) {
       if (tally[i] > max)
         max = tally[i];
     }
     System.out.print(max);
-    for (int i = 0; i < stateColor.length; i++) {
+    for (int i = 0; i < stateColor.length; i++) { // calculates state colour based on percentage of largest state colour
       float h = 255 - (tally[i]*230/max);
       stateColor[i] = color(h);
     }
