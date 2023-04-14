@@ -1,4 +1,4 @@
-//Created by Abigail Bosch, Contributed by D. Tempalr
+//Created by D. Tempalr
 import controlP5.*;
 import java.util.*;
   
