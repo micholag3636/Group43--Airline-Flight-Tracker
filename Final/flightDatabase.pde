@@ -1,5 +1,5 @@
 //Class and constructor created by D. Templar
-//flightDatabase constructor created by Avani. Edited by D. Templar
+//flightDatabase constructor created by Avani. Edited by D. Templar and Abigail Bosch
 public class flightDatabase {
     
      String FL_DATE;

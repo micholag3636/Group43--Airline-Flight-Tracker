@@ -1,3 +1,5 @@
+// Created by Abigail Bosch
+// Tallys the number of flights Originating/Terminating in a state, used to calculate state colours
 int[] tally(ArrayList<flightDatabase> flights, int type) {
   // pretty self explanatory, tallys number of flights originating from each state
   int[] tallyhall = new int[50];
@@ -5,10 +7,11 @@ int[] tally(ArrayList<flightDatabase> flights, int type) {
   {
     String state = "";
     flightDatabase f = flights.get(i);
+    // origin or destination depending on input
     if (type == GET_ORIGIN_STATE_ABR) state = f.ORIGIN_STATE_ABR;
     else if (type == GET_DEST_STATE_ABR) state = f.DEST_STATE_ABR;
-    //System.out.print(f.DEST_STATE_ABR + ".");
     
+    // if the state code is the same as a state increment that state
     if (state.equals("AL")) tallyhall[0] += 1;
     else if (state.equals("AK")) tallyhall[1] += 1;
     else if (state.equals("AZ")) tallyhall[2] += 1;
@@ -60,5 +63,6 @@ int[] tally(ArrayList<flightDatabase> flights, int type) {
     else if (state.equals("WI")) tallyhall[48] += 1;
     else if (state.equals("WY")) tallyhall[49] += 1;
   }
+  // return integer arraylist for state colour calculations
   return tallyhall;
 }

@@ -1,3 +1,4 @@
+// Created by Abigail Bosch, Contributed by D. Templar
 import java.util.ArrayList;
 import geomerative.*;
 import grafica.*;
@@ -9,8 +10,6 @@ ArrayList<flightDatabase> flights;
 ArrayList<flightDatabase> narrowFlights;
 boolean done=false;
 int on = 0;
-
-
 
 ControlP5 cp5;
 Screen theScreen;
