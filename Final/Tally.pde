@@ -6,7 +6,8 @@ int[] tally(ArrayList<flightDatabase> flights, int type) {
     String state = "";
     flightDatabase f = flights.get(i);
     if (type == GET_ORIGIN_STATE_ABR) state = f.ORIGIN_STATE_ABR;
-    else if (type == GET_DEST_STATE_ABR) state = f.ORIGIN_STATE_ABR;
+    else if (type == GET_DEST_STATE_ABR) state = f.DEST_STATE_ABR;
+    //System.out.print(f.DEST_STATE_ABR + ".");
     
     if (state.equals("AL")) tallyhall[0] += 1;
     else if (state.equals("AK")) tallyhall[1] += 1;

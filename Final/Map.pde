@@ -2,6 +2,8 @@ class Map {
   ArrayList widgetList;
   PShape usa;
   color[] stateColor;
+  PFont inFont;
+  String stateTitle;
 
   Map() {
     // creates StateWidget object for each state
@@ -11,8 +13,9 @@ class Map {
       mississippi, missouri, montana, nebraska, nevada, newhampshire, newjersey,
       newmexico, newyork, northcarolina, northdakota, ohio, oklahoma, oregon,
       pennsylvania, rhodeisland, southcarolina, southdakota, tennessee, texas, utah,
-      vermont, virginia, washington, westvirginia, wisconsin, wyoming; 
-
+      vermont, virginia, washington, westvirginia, wisconsin, wyoming;
+      
+    // loads in SVG file and makes it a shape that can be used by geomerative library
     stateColor = new color[50];
     usa = loadShape("usa-wikipedia.svg");
     RShape shp = RG.loadShape("usa-wikipedia.svg");
@@ -118,15 +121,21 @@ class Map {
     widgetList.add(wisconsin);
     wyoming = new StateWidget(usa.getChild("WY"), "Wyoming", stateColor[49], shp.getChild("WY"), "WY");
     widgetList.add(wyoming);
+    
+    inFont = loadFont("Calibri-Bold-48.vlw");
+    stateTitle = "America";
   }
 
   void draw() { // draw method for each state
-  background(bg2);
+  //background(bg2);
     shape(usa);
     for (int i = 0; i<widgetList.size(); i++) {
       StateWidget aWidget = (StateWidget) widgetList.get(i);
       aWidget.draw(stateColor[i]);
     }
+    textFont(inFont);
+    fill(0);
+    text(stateTitle, (SCREEN_X-BORDER-380), (BORDER+50));
   }
   void mouseMoved() { // mouse hovering over state widget???
     String stateName;
@@ -139,11 +148,14 @@ class Map {
     String stateName = "";
     for (int i = 0; i<widgetList.size(); i++) {
         StateWidget aWidget = (StateWidget) widgetList.get(i);
-        if (aWidget.getName(mouseX, mouseY) != null) stateName = aWidget.getName(mouseX, mouseY);
+        if (aWidget.getName(mouseX, mouseY) != null) {
+          stateName = aWidget.getName(mouseX, mouseY);
+          stateTitle = aWidget.getTitle(mouseX, mouseY);
+        }
       }
    return(stateName);
   }
-  void getColors(int[] tally) {
+  void getColors(int[] tally) { //calculates each states colour by getting the number of states tallied and putting it through a formula 
     int max = 1;
     for (int i = 0; i < tally.length; i++) {
       if (tally[i] > max)
