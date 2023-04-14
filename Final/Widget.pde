@@ -1,4 +1,4 @@
-//Created by Abigail Bosch, Michael
+//Created by Abigail Bosch, Michael, D. Templar
 class Widget {
   int x, y, width, height;
   String label;
