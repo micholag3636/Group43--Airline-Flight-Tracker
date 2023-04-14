@@ -1,3 +1,4 @@
+//Written by Michael
 class Slider {
   float x, y;
   float w, h;
